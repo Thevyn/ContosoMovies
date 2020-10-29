@@ -29,9 +29,17 @@ namespace assignment.Controllers
         public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesBySearch(string searchString)
         {
             var _movies = await _movieService.GetMovies();
+            string format = "dd-MM-yyyy";
             if(searchString != null && searchString != "")
             {
-               _movies = _movies.Where(s => s.Name.ToLower().Contains(searchString.ToLower()) || s.Director.ToLower().Contains(searchString.ToLower()) || s.ReleaseDate.CompareTo(Convert.ToDateTime(searchString)) == 0);
+                if(DateTime.TryParse(searchString, out DateTime searchDate))
+                {
+                    _movies = _movies.Where(m => m.ReleaseDate == searchDate);
+                }
+                else
+                {
+                    _movies = _movies.Where(s => s.Name.ToLower().Contains(searchString.ToLower()) || s.Director.ToLower().Contains(searchString.ToLower()));
+                }
             }
           
                 return Ok(_movies);
