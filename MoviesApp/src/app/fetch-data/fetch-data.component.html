@@ -1,0 +1,62 @@
+<h1 id="tableLabel">Movies</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!movies"><em>Loading...</em></p>
+<form (submit)="onSearch()">
+  <input
+    type="text"
+    placeholder="Search for a movie"
+    (keyup)="onChange($event)"
+    value="{{ searchString }}"
+  />
+  <button type="submit">Search</button>
+</form>
+
+<label for="category">Choose a category:</label>
+<select name="category" id="category" (change)="onGenreChange($event)">
+  <option value="">Alle</option>
+  <option value="Action">Action</option>
+  <option value="Sci-Fi">Sci-Fi</option>
+  <option value="Romantic">Romantic</option>
+  <option value="Fantasy">Fantasy</option>
+  <option value="Drama">Drama</option>
+  <option value="Thriller">Thriller</option>
+  <option value="Horror">Horror</option>
+</select>
+
+<table
+  class="table table-striped mt-3"
+  aria-labelledby="tableLabel"
+  *ngIf="movies"
+>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Director</th>
+      <th>Release Date</th>
+      <th>Cast</th>
+      <th>Genre</th>
+      <th>Description</th>
+      <th><a class="btn btn-success" href="/add-movie"> Add movie </a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of movies">
+      <td>{{ movie.name }}</td>
+      <td>{{ movie.director }}</td>
+      <td>{{ movie.releaseDate | date: "longDate":"IST" }}</td>
+      <td>{{ movie.cast }}</td>
+      <td>{{ movie.genre }}</td>
+      <td>{{ movie.description }}</td>
+      <td>
+        <a class="btn btn-primary" href="/edit-movie/{{ movie.id }}">Edit</a>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="onDelete(movie.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

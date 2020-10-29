@@ -1,0 +1,73 @@
+<h1>Edit movie</h1>
+
+<form (submit)="onSubmit($event)">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      aria-describedby="name"
+      placeholder="Name of movie"
+      (keyup)="onChange($event)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="director">Director</label>
+    <input
+      type="text"
+      class="form-control"
+      id="director"
+      name="director"
+      placeholder="Name of director"
+      (keyup)="onChange($event)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="releaseDate">Release Date</label>
+    <input
+      type="text"
+      class="form-control"
+      id="releaseDate"
+      name="releaseDate"
+      placeholder="Release date"
+      (keyup)="onChange($event)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="cast">Cast</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cast"
+      name="cast"
+      placeholder="Name of cast"
+      (keyup)="onChange($event)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="genre">Genre</label>
+    <input
+      type="text"
+      class="form-control"
+      id="genre"
+      name="genre"
+      placeholder="Name of genre"
+      (keyup)="onChange($event)"
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      name="description"
+      placeholder="Name of description"
+      (keyup)="onChange($event)"
+    />
+  </div>
+  <p class="text-danger">{{ error }}</p>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

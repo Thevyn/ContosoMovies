@@ -1,0 +1,32 @@
+version: "3.4"
+
+services:
+  moviesapi:
+    build:
+      context: ./MoviesAPI
+      dockerfile: Dockerfile
+    container_name: moviesapi
+    ports:
+      - 8005:80
+      - 8006:443
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      user: "sa"
+      SA_PASSWORD: "Password_1234"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 14331:1433
+
+  moviesapp:
+    build:
+      context: ./MoviesApp
+      dockerfile: Dockerfile
+    container_name: moviesapp
+    ports:
+      - "8000:80"
+    depends_on:
+      - moviesapi
