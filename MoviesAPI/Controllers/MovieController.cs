@@ -29,7 +29,6 @@ namespace assignment.Controllers
         public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesBySearch(string searchString)
         {
             var _movies = await _movieService.GetMovies();
-            string format = "dd-MM-yyyy";
             if(searchString != null && searchString != "")
             {
                 if(DateTime.TryParse(searchString, out DateTime searchDate))
